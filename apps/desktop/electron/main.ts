@@ -5058,7 +5058,7 @@ async function ensureRuntime(
     rememberLog('[bootstrap] REFUSING installer on a bundled install; payload missing or damaged — reinstall the app')
 
     const bundledError: Error & { isBootstrapFailure?: boolean } = new Error(
-      'This app bundles its own Hermes runtime, but the runtime files are missing or damaged. Reinstall Hermes Desktop to restore it.'
+      'This app bundles its own SANA runtime, but the runtime files are missing or damaged. Reinstall SANA to restore it.'
     )
 
     bundledError.isBootstrapFailure = true
@@ -11459,7 +11459,7 @@ async function startHermes(requestedProfile?: string, inheritsPrimary = false) {
   // otherwise SIGTERMs the running instance's live backend (#87295).
   if (!isPrimaryInstance) {
     rememberLog('[boot] non-primary instance: skipping backend machinery')
-    throw new Error('Hermes Desktop is already running in another window.')
+    throw new Error('SANA is already running in another window.')
   }
 
   await reapOrphanedBackendsOnce()

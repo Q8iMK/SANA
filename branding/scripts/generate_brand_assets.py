@@ -452,6 +452,7 @@ def _sync_targets_from_rendered(
     if website_img.exists():
         sym_black_fn(website_img / "logo.png")
         sym_gold_fn(website_img / "logo-dark.png")
+        shutil.copyfile(RENDERED_DIR / "sana-banner.png", website_img / "sana-banner.png")
         resize_fn(icon_light_1024, website_img / "nous-logo.png", 150, 150)
         resize_fn(icon_dark_1024, website_img / "nous-logo-dark.png", 150, 150)
         resize_fn(icon_dark_1024, website_img / "favicon-16x16.png", 16, 16)

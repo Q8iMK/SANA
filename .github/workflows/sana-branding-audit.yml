@@ -1,0 +1,102 @@
+name: SANA Branding Audit
+
+on:
+  push:
+    branches:
+      - main
+      - 'upstream*'
+      - 'sync/*'
+    paths:
+      - 'branding/**'
+      - 'sana_branding.py'
+      - 'README*.md'
+      - 'package.json'
+      - 'setup.py'
+      - 'setup-hermes.*'
+      - 'setup-sana.*'
+      - 'website/docusaurus.config.ts'
+      - 'website/static/img/**'
+      - 'apps/desktop/package.json'
+      - 'apps/desktop/product-identity.cjs'
+      - 'apps/desktop/electron-builder.config.cjs'
+      - 'apps/desktop/src/i18n/**'
+      - 'apps/bootstrap-installer/**'
+      - 'web/index.html'
+      - 'web/src/i18n/**'
+      - 'hermes_cli/**'
+      - 'gateway/**'
+      - 'scripts/releases/**'
+      - '.github/workflows/sana-branding-audit.yml'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  branding-audit:
+    name: SANA Branding & Identity Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Install Python test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pyyaml
+
+      - name: Validate branding configuration & run check-mode audit (immutability + reports)
+        run: |
+          mkdir -p artifacts/branding-audit
+          python branding/scripts/apply_branding.py --check --skip-assets \
+            --json-report artifacts/branding-audit/report.json \
+            --md-report artifacts/branding-audit/report.md
+          git diff --exit-code
+
+      - name: Verify branding idempotence
+        run: |
+          python branding/scripts/apply_branding.py --skip-assets
+          git diff --exit-code
+
+      - name: Verify asset integrity
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path('branding/manifest.json').read_text(encoding='utf-8'))
+          for asset in manifest['assets']['masters'] + manifest['assets']['destinations']:
+              p = Path(asset)
+              assert p.is_file() and p.stat().st_size > 0, f'Missing or empty asset: {asset}'
+          print(f'Verified {len(manifest[\"assets\"][\"masters\"]) + len(manifest[\"assets\"][\"destinations\"])} brand assets.')
+          "
+
+      - name: Run SANA branding regression & structural unit tests
+        run: |
+          pytest branding/tests/test_sana_branding.py -v
+
+      - name: Verify CLI identity & smoke test
+        run: |
+          python sana --version
+          python sana --help | head -n 20
+
+      - name: Append Markdown report to step summary
+        if: always()
+        run: |
+          if [ -f artifacts/branding-audit/report.md ]; then
+            cat artifacts/branding-audit/report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload branding audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sana-branding-audit-reports
+          path: artifacts/branding-audit/
+          retention-days: 30

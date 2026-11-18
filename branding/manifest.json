@@ -36,7 +36,10 @@
       "web/public/favicon.ico",
       "web/public/favicon.svg",
       "website/static/img/favicon.ico",
-      "website/static/img/favicon.svg"
+      "website/static/img/favicon.svg",
+      "website/static/img/logo.png",
+      "website/static/img/logo-dark.png",
+      "website/static/img/sana-banner.png"
     ]
   },
   "targets": [
@@ -97,12 +100,20 @@
       "branding/BRANDING.md",
       "sana_branding.py",
       "README.md",
+      "README.es.md",
+      "README.zh-CN.md",
+      "README.ur-pk.md",
+      "setup-sana.ps1",
+      "setup-sana.sh",
+      "website/docusaurus.config.ts",
       "LICENSE"
     ],
     "forbiddenUserFacingPatterns": [
       "Hermes Agent",
       "Hermes Desktop",
-      "Built by Nous Research"
+      "Built by Nous Research",
+      "hermes-agent.nousresearch.com",
+      "hermes-assets.nousresearch.com"
     ],
     "allowedTechnicalExceptions": [
       "upstream",

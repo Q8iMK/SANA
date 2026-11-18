@@ -94,11 +94,11 @@ class R2ChannelStore:
 
 def preview_identity(name: str, token: str) -> dict:
     validate_name(name)
-    pascal = f"HermesChannel{token}"
-    return {"token": token, "displayName": f"Hermes {name}",
-            "appId": f"ai.hermes.channel.h{token}", "appNamePascal": pascal,
-            "artifactNamePascal": pascal, "cliName": f"hermes-{name}",
-            "windowsExecutableName": pascal, "msixAppIdWithOrg": f"NousResearch.{pascal}"}
+    pascal = f"SANAChannel{token}"
+    return {"token": token, "displayName": f"SANA {name}",
+            "appId": f"ai.q8idev.sana.channel.h{token}", "appNamePascal": pascal,
+            "artifactNamePascal": pascal, "cliName": f"sana-{name}",
+            "windowsExecutableName": pascal, "msixAppIdWithOrg": f"Q8iDevAI.{pascal}"}
 
 
 class ChannelPublisher:

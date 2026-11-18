@@ -1849,7 +1849,7 @@ export const esOverrides = {
       sshErrHostKey:
         'La clave del host CAMBIÓ desde la última conexión. Confirma que sea un cambio esperado, ejecuta ssh-keygen -R <host> y vuelve a conectar.',
       sshErrNotInstalled:
-        'Hermes no está instalado en el host remoto. Instálalo allí (curl -fsSL https://hermes-agent.nousresearch.com/install.sh | sh) o indica la ruta de Hermes.',
+        'Hermes no está instalado en el host remoto. Instálalo allí (curl -fsSL https://raw.githubusercontent.com/Q8iMK/SANA/main/scripts/install.sh | sh) o indica la ruta de Hermes.',
       sshErrPlatform:
         'Plataforma remota no compatible. El modo SSH de SANA admite hosts remotos Linux, macOS y Windows.',
       sshErrTimeout: 'La conexión SSH agotó el tiempo de espera. Es posible que el host no responda o esté en reposo.',

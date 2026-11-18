@@ -2,7 +2,7 @@
 setup.py — wheel/sdist build guard.
 
 pip/PyPI and Homebrew are no longer supported distribution methods for
-Hermes Agent (see website/docs/getting-started/platform-support.md). The
+SANA (see website/docs/getting-started/platform-support.md). The
 wheel would ship without bundled assets (locales, skills, optional-mcps,
 web_dist, tui_dist, plugin manifests) since those are resolved at runtime
 via env-var overrides set by the nix wrapper or the source-checkout layout.
@@ -34,15 +34,15 @@ _ROOT = os.path.dirname(os.path.abspath(__file__))
 _IN_NIX_BUILD = os.environ.get("HERMES_NIX_BUILD") == "1"
 
 _BLOCK_MESSAGE = (
-    "Building wheels or sdists for hermes-agent is not supported.\n"
-    "Hermes is distributed via the shell installer, Docker image, or Nix.\n"
-    "See: https://hermes-agent.nousresearch.com/docs/getting-started/installation\n"
+    "Building wheels or sdists for SANA (package: hermes-agent) is not supported.\n"
+    "SANA (developed by Q8iDevAI) is distributed via the SANA installer, Docker image, or Nix.\n"
+    "See: https://github.com/Q8iMK/SANA#readme\n"
     "\n"
     "If you are developing, use an editable install instead:\n"
     "  source ./activate  # PowerShell: . .\\activate.ps1\n"
     "\n"
     "If you are building with Nix (uv2nix), this error should not fire —\n"
-    "the Hermes Nix derivation sets HERMES_NIX_BUILD=1. If it does, file a bug."
+    "the Nix derivation sets HERMES_NIX_BUILD=1. If it does, file a bug."
 )
 
 

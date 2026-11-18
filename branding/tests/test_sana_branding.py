@@ -176,3 +176,127 @@ def test_upstream_git_remote_configured():
     )
     assert res.returncode == 0
     assert "NousResearch/hermes-agent" in res.stdout
+
+
+def test_docusaurus_config_branded_and_preserves_algolia():
+    text = (REPO_ROOT / "website" / "docusaurus.config.ts").read_text(encoding="utf-8")
+    assert "title: 'SANA'" in text
+    assert "tagline: 'Your Intelligent AI Assistant'" in text
+    assert "organizationName: 'Q8iMK'" in text
+    assert "projectName: 'SANA'" in text
+    assert "image: 'img/sana-banner.png'" in text
+    assert "Q8iDevAI" in text
+    # Algolia technical index must be preserved
+    assert "indexName: 'hermes docs'" in text
+    # Website banner & logos must exist and be non-empty
+    for asset in ("logo.png", "logo-dark.png", "sana-banner.png"):
+        p = REPO_ROOT / "website" / "static" / "img" / asset
+        assert p.is_file() and p.stat().st_size > 0
+
+
+def test_translated_readmes_branded_with_attribution():
+    for name in ("README.es.md", "README.zh-CN.md", "README.ur-pk.md"):
+        text = (REPO_ROOT / name).read_text(encoding="utf-8")
+        assert "# SANA" in text
+        assert "Q8iDevAI" in text
+        assert "Q8iMK/SANA" in text
+        assert "sana " in text or "`sana`" in text
+        # Must acknowledge Nous Research as original upstream
+        assert "Nous Research" in text
+        # Must not point install commands at upstream site
+        assert "hermes-agent.nousresearch.com/install" not in text
+        assert "Built%20by-Nous%20Research" not in text
+        assert "Creado%20por-Nous%20Research" not in text
+
+
+def test_setup_scripts_sana_first_and_isolated():
+    for name in ("setup-hermes.ps1", "setup-hermes.sh", "setup-sana.ps1", "setup-sana.sh"):
+        assert (REPO_ROOT / name).is_file()
+    ps1 = (REPO_ROOT / "setup-hermes.ps1").read_text(encoding="utf-8")
+    assert "SANA Setup" in ps1
+    assert "Q8iDevAI" in ps1
+    assert "SANA_HOME" in ps1
+    assert "sana setup" in ps1
+    sh = (REPO_ROOT / "setup-hermes.sh").read_text(encoding="utf-8")
+    assert "SANA Setup" in sh
+    assert "Q8iDevAI" in sh
+    assert "SANA_HOME" in sh
+    assert "sana setup" in sh
+
+
+def test_package_metadata_and_setup_py():
+    root_pkg = json.loads((REPO_ROOT / "package.json").read_text(encoding="utf-8"))
+    assert root_pkg["name"] == "hermes-agent"  # pnpm workspace compat
+    assert "SANA" in root_pkg["description"]
+    assert "Q8iDevAI" in root_pkg["description"]
+    assert "Q8iMK/SANA" in root_pkg["repository"]["url"]
+    assert "Q8iMK/SANA" in root_pkg["bugs"]["url"]
+    assert "Q8iMK/SANA" in root_pkg["homepage"]
+
+    desk_pkg = json.loads((REPO_ROOT / "apps" / "desktop" / "package.json").read_text(encoding="utf-8"))
+    assert desk_pkg["name"] == "hermes"  # pnpm workspace filter compat
+    assert desk_pkg["productName"] == "SANA"
+    assert "Q8iMK/SANA" in desk_pkg["repository"]["url"]
+
+    setup_py = (REPO_ROOT / "setup.py").read_text(encoding="utf-8")
+    assert "SANA" in setup_py
+    assert "Q8iDevAI" in setup_py
+    assert "hermes-agent.nousresearch.com" not in setup_py
+
+
+def test_update_feeds_and_releases_isolated_from_upstream():
+    from hermes_cli import source_releases, update_cmd_git
+
+    assert source_releases.OFFICIAL_REPOSITORY == "Q8iMK/SANA"
+    assert "nousresearch.com" not in source_releases._PUBLIC_BASE
+    assert "Q8iMK/SANA" in update_cmd_git.OFFICIAL_REPO_URL
+    assert all("Q8iMK/SANA" in u for u in update_cmd_git.OFFICIAL_REPO_URLS)
+
+    r2_text = (REPO_ROOT / "scripts" / "releases" / "r2.py").read_text(encoding="utf-8")
+    assert 'DEFAULT_PUBLIC_URL = "https://hermes-assets.nousresearch.com"' not in r2_text
+
+    channels_text = (REPO_ROOT / "scripts" / "releases" / "channels.py").read_text(encoding="utf-8")
+    assert "SANAChannel" in channels_text
+    assert "Q8iDevAI." in channels_text
+
+
+def test_audit_fails_on_visible_hermes_regression(tmp_path):
+    sys.path.insert(0, str(REPO_ROOT / "branding" / "scripts"))
+    import apply_branding
+
+    bad = tmp_path / "bad_ui.ts"
+    bad.write_text('export const msg = "Update Hermes Desktop now";\n', encoding="utf-8")
+    manifest = json.loads((REPO_ROOT / "branding" / "manifest.json").read_text(encoding="utf-8"))
+    report = apply_branding.BrandingReport()
+    # Simulate scanning a user-facing file with unattributed Hermes Desktop text
+    for lineno, line in enumerate(bad.read_text(encoding="utf-8").splitlines(), 1):
+        for pat in manifest["validation"]["forbiddenUserFacingPatterns"]:
+            if pat in line:
+                report.audit_warnings.append(f"bad_ui.ts:{lineno}: contains '{pat}'")
+    assert report.audit_warnings, "Regression check must catch unbranded display strings"
+
+
+def test_check_mode_writes_json_and_md_reports(tmp_path):
+    json_out = tmp_path / "report.json"
+    md_out = tmp_path / "report.md"
+    res = subprocess.run(
+        [
+            sys.executable,
+            "branding/scripts/apply_branding.py",
+            "--check",
+            "--skip-assets",
+            "--json-report",
+            str(json_out),
+            "--md-report",
+            str(md_out),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert res.returncode == 0, res.stdout + res.stderr
+    data = json.loads(json_out.read_text(encoding="utf-8"))
+    assert data["ok"] is True
+    assert data["conflicts"] == []
+    assert "PASS" in md_out.read_text(encoding="utf-8")

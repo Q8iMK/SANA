@@ -118,9 +118,9 @@ test('nonstable runtime pins userData before the app name can change', async ():
 })
 
 test.each([
-  [undefined, 'Hermes', 'hermes', 'latest', 'canary'],
-  ['bundled', 'Hermes Agent', 'hermes', 'latest', 'canary'],
-  ['light', 'Hermes Light', 'hermes-light', 'light', 'light-canary']
+  [undefined, 'SANA', 'sana', 'latest', 'canary'],
+  ['bundled', 'SANA', 'sana', 'latest', 'canary'],
+  ['light', 'SANA Light', 'sana-light', 'light', 'light-canary']
 ] as const)(
   '%s separates stable, canary and independent commits',
   async (
@@ -187,11 +187,12 @@ test('light and bundled retain distinct OS markers from the full client', async 
   for (const variant of ['bundled', 'light']) {
     const other: ProductIdentity = await identityForVariant(variant)
 
-    for (const field of ['displayName', 'appId', 'appNamePascal'] as const) {
+    for (const field of ['appId', 'appNamePascal'] as const) {
       assert.notEqual(other[field], full[field])
     }
 
     if (variant === 'light') {
+      assert.notEqual(other.displayName, full.displayName)
       assert.notEqual(other.msixAppIdWithOrg, full.msixAppIdWithOrg)
       assert.notEqual(other.channel, full.channel)
     }
@@ -254,7 +255,7 @@ test('packaging isolates boot metadata and executable names without renaming rel
     const artifact: ReturnType<typeof appIdentity> = appIdentity(fileURLToPath(new URL('../', import.meta.url)))
     assert.equal(artifact.name, identity.artifactNamePascal)
     assert.equal(artifact.identity.msixAppIdWithOrg, config.msix.identityName)
-    assert.deepEqual(config.protocols[0].schemes, ['hermes'])
+    assert.deepEqual(config.protocols[0].schemes, ['sana', 'hermes'])
 
     if (build !== 'canary') {
       assert.equal(config.publish, null)
@@ -290,9 +291,9 @@ test('nonstable builds cannot claim the official Store package', async (): Promi
 test('store carries the Partner Center MSIX identity and no other variant does', async (): Promise<void> => {
   const store: ProductIdentity = await identityForVariant('store')
   assert.deepEqual(store.storeMsix, {
-    identityName: 'NousResearchInc.HermesAgent',
+    identityName: 'Q8iDevAI.SANA',
     publisher: 'CN=EE6D86E4-606F-4E38-B940-AD7248C9D519',
-    publisherDisplayName: 'Nous Research Inc.'
+    publisherDisplayName: 'Q8iDevAI'
   })
 
   for (const v of [undefined, 'bundled', 'light'] as const) {

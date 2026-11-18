@@ -1502,7 +1502,7 @@ export const en: Translations = {
       sshErrHostKey:
         'The host key has CHANGED since you last connected. Verify this is expected, then run ssh-keygen -R <host> and reconnect.',
       sshErrNotInstalled:
-        'Hermes is not installed on the remote host. Install it there (curl -fsSL https://hermes-agent.nousresearch.com/install.sh | sh) or set the Hermes path.',
+        'SANA is not installed on the remote host. Install it there (curl -fsSL https://raw.githubusercontent.com/Q8iMK/SANA/main/scripts/install.sh | sh) or set the SANA path.',
       sshErrPlatform:
         'Unsupported remote platform. SANA SSH mode supports Linux, macOS, and Windows remote hosts.',
       sshErrTimeout: 'SSH connection timed out. The host may be unreachable or asleep.',

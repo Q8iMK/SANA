@@ -1,5 +1,6 @@
-# ============================================================================
-# Hermes Agent Setup Script (Windows) — THE dev-environment entry point.
+﻿# ============================================================================
+# SANA Setup Script (Windows) — THE dev-environment entry point.
+# Developed by Q8iDevAI (based on Hermes Agent by Nous Research).
 # ============================================================================
 # Sets up the pm-managed development environment from a fresh clone:
 #   1. Stage the pinned uv from pm/lock.json (sha256-verified, into the pm
@@ -16,7 +17,8 @@ param([switch]$RuntimeOnly, [string]$TestExtras = '')
 $ErrorActionPreference = 'Stop'
 
 Write-Host ''
-Write-Host 'Hermes Agent Setup' -ForegroundColor Cyan
+Write-Host '✦ SANA Setup — Your Intelligent AI Assistant' -ForegroundColor Yellow
+Write-Host '  Developed by Q8iDevAI' -ForegroundColor DarkGray
 Write-Host ''
 
 $repo = $PSScriptRoot
@@ -40,7 +42,10 @@ if (-not $artifact) { throw "no uv artifact for $target" }
 $pyPin = $lock.packages.python
 $pyVersion = if ($pyPin) { ($pyPin.version -split '\+')[0] -replace '^(\d+\.\d+).*', '$1' } else { '3.11' }
 
-$store = if ($env:HERMES_RUNTIME_DIR) { $env:HERMES_RUNTIME_DIR } else { Join-Path $HOME '.hermes/tools' }
+$sanaBase = if ($env:LOCALAPPDATA -and $env:LOCALAPPDATA.Trim()) { Join-Path $env:LOCALAPPDATA 'sana' } else { Join-Path $HOME '.sana' }
+$sanaHome = if ($env:SANA_HOME) { $env:SANA_HOME } elseif ($env:HERMES_HOME) { $env:HERMES_HOME } else { $sanaBase }
+$store = if ($env:SANA_RUNTIME_DIR) { $env:SANA_RUNTIME_DIR } elseif ($env:HERMES_RUNTIME_DIR) { $env:HERMES_RUNTIME_DIR } else { Join-Path $sanaHome 'tools' }
+if (-not $env:HERMES_RUNTIME_DIR) { $env:HERMES_RUNTIME_DIR = $store }
 $entry = Join-Path $store "uv-$($uvPin.version)-$target"
 $uv = Join-Path $entry 'uv.exe'
 
@@ -48,7 +53,7 @@ if (Test-Path $uv) {
     Write-Host ("pinned uv found: " + (& $uv --version)) -ForegroundColor Green
 } else {
     Write-Host "Staging pinned uv $($uvPin.version) ($target) into the pm store..." -ForegroundColor Cyan
-    $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("hermes-setup-" + [guid]::NewGuid().ToString('n'))
+    $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("sana-setup-" + [guid]::NewGuid().ToString('n'))
     New-Item -ItemType Directory -Path $tmp | Out-Null
     try {
         $archive = Join-Path $tmp ([uri]$artifact.url).Segments[-1]
@@ -120,22 +125,47 @@ if (-not (Test-Path $envFile)) {
 }
 
 # ---------------------------------------------------------------------------
-# Seed bundled skills into ~/.hermes/skills/
+# Publish SANA user-facing launchers and ensure PATH
 # ---------------------------------------------------------------------------
-$skillsDir = if ($env:HERMES_HOME) { Join-Path $env:HERMES_HOME 'skills' } else { Join-Path $HOME '.hermes/skills' }
+$binDir = Join-Path $sanaHome 'bin'
+New-Item -ItemType Directory -Force -Path $binDir | Out-Null
+$venvPy = Join-Path $repo 'venv/Scripts/python.exe'
+$launcherWriter = Join-Path $repo 'hermes_cli/_launchers.py'
+if ((Test-Path $launcherWriter) -and (Test-Path $venvPy)) {
+    & $venvPy -I -X utf8 $launcherWriter $binDir 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Published SANA commands in $binDir" -ForegroundColor Green
+    }
+}
+$userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+if ($userPath -and ($userPath -split ';' | Where-Object { $_.TrimEnd('\') -ieq $binDir.TrimEnd('\') }).Count -eq 0) {
+    [Environment]::SetEnvironmentVariable('Path', "$binDir;$userPath", 'User')
+    $env:Path = "$binDir;$env:Path"
+    Write-Host "Added $binDir to user PATH" -ForegroundColor Green
+}
+
+# ---------------------------------------------------------------------------
+# Seed bundled skills into SANA's isolated skills directory
+# ---------------------------------------------------------------------------
+$skillsDir = Join-Path $sanaHome 'skills'
 New-Item -ItemType Directory -Force -Path $skillsDir | Out-Null
 $sync = Join-Path $repo 'tools/skills_sync.py'
-$venvPy = Join-Path $repo 'venv/Scripts/python.exe'
 if ((Test-Path $sync) -and (Test-Path $venvPy)) {
-    & $venvPy $sync 2>$null
-    Write-Host 'Skills synced' -ForegroundColor Green
+    $prevHermesHome = $env:HERMES_HOME
+    try {
+        $env:HERMES_HOME = $sanaHome
+        & $venvPy $sync 2>$null
+    } finally {
+        if ($null -eq $prevHermesHome) { Remove-Item Env:HERMES_HOME -ErrorAction SilentlyContinue } else { $env:HERMES_HOME = $prevHermesHome }
+    }
+    Write-Host "Skills synced to $skillsDir" -ForegroundColor Green
 }
 
 # ---------------------------------------------------------------------------
 # Done
 # ---------------------------------------------------------------------------
 Write-Host ''
-Write-Host 'Setup complete!' -ForegroundColor Green
+Write-Host 'SANA setup complete!' -ForegroundColor Green
 Write-Host ''
 Write-Host 'Next steps:'
 Write-Host ''
@@ -143,10 +173,13 @@ Write-Host '  1. Activate the dev environment (venv-style, in THIS session):'
 Write-Host '     .\activate.ps1'
 Write-Host ''
 Write-Host '  2. Run the setup wizard to configure API keys:'
-Write-Host '     hermes setup'
+Write-Host '     sana setup'
 Write-Host ''
 Write-Host '  3. Start chatting:'
-Write-Host '     hermes'
+Write-Host '     sana'
+Write-Host ''
+Write-Host '  Optional — migrate existing Hermes data without modifying it:'
+Write-Host '     sana import-hermes --dry-run'
 Write-Host ''
 Write-Host 'Other commands:'
 Write-Host '  hermes pm install     # Re-run the tool + dependency install'

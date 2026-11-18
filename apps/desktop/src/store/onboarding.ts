@@ -897,7 +897,7 @@ export async function refreshOnboarding(ctx: OnboardingContext, stillWanted?: ()
         kind: 'info',
         title: 'Runtime not ready',
         message:
-          'Hermes Desktop could not verify the running backend on startup. Some features may be unavailable until the gateway is reachable.'
+          'SANA could not verify the running backend on startup. Some features may be unavailable until the gateway is reachable.'
       })
     }
 

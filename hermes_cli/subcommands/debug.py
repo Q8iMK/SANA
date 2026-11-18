@@ -10,7 +10,7 @@ def build_debug_parser(subparsers, *, cmd_debug: Callable) -> None:
     """Attach the ``debug`` subcommand to ``subparsers``."""
     debug_parser = subparsers.add_parser(
         "debug", help="Debug tools — upload logs and system info for support",
-        description="Debug utilities for Hermes Agent. Use 'hermes debug share' to "
+        description="Debug utilities for SANA. Use 'hermes debug share' to "
         "upload an allowlisted debug summary (versions, config key names, error "
         "counts; no log text) to a public paste, or 'hermes debug share --nous' "
         "to send full redacted logs to private Nous storage.",
