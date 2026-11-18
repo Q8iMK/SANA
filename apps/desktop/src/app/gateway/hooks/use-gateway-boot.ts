@@ -25,7 +25,7 @@ import {
 import { resolveDesktopGatewayWsUrl } from '@/lib/gateway-ws-url'
 import { hostHas } from '@/lib/host-capabilities'
 import { browserLaunchProfile } from '@/lib/platform'
-import { BACKEND_BOOT_WAIT_TIMEOUT_MS, RECONNECT_ATTEMPT_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
+import { BACKEND_BOOT_WAIT_TIMEOUT_MS, RECONNECT_ATTEMPT_TIMEOUT_MS, TimeoutError, withTimeout } from '@/lib/with-timeout'
 import {
   $desktopBoot,
   applyDesktopBootProgress,
@@ -1003,9 +1003,14 @@ export function useGatewayBoot({
       }
     }
 
+    let resetBootWaitTimer: (() => void) | null = null
+
     const onBootProgress = (payload: DesktopBootProgress) => {
       if (cancelled) {
         return
+      }
+      if (!payload.error) {
+        resetBootWaitTimer?.()
       }
 
       // Soft switch / post-boot startHermes re-emits progress — ignore so the
@@ -1534,14 +1539,51 @@ export function useGatewayBoot({
         // backend directly — ensureBackend spawns/reuses it from the pool.
         // Full peers use the source/profile Electron pinned before loading.
         // Bounded like the reconnect path (#93454): a wedged main-process
-        // round-trip must not hang "Starting Hermes…" forever. Initial boot
-        // rides out a full backend cold spawn, so it gets the shared 45s
-        // backend-boot budget, not the 20s reconnect budget.
-        const conn = await withTimeout(
-          getWindowBackend(true),
-          BACKEND_BOOT_WAIT_TIMEOUT_MS,
-          'Timed out connecting to Hermes backend'
-        )
+        // round-trip must not hang "Starting SANA…" forever. Initial boot
+        // resets the 45s inactivity budget whenever boot progress advances
+        // (e.g. during first-launch bootstrap) so cold backend startup after
+        // bootstrap still gets the full 45s budget.
+        const conn = await new Promise<Awaited<ReturnType<typeof getWindowBackend>>>((resolve, reject) => {
+          let settled = false
+          let timer: ReturnType<typeof setTimeout> | undefined
+
+          const armTimer = () => {
+            if (settled) {
+              return
+            }
+
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+              if (!settled) {
+                settled = true
+                resetBootWaitTimer = null
+                reject(new TimeoutError('Timed out connecting to SANA backend'))
+              }
+            }, BACKEND_BOOT_WAIT_TIMEOUT_MS)
+          }
+
+          resetBootWaitTimer = armTimer
+          armTimer()
+
+          getWindowBackend(true).then(
+            value => {
+              if (!settled) {
+                settled = true
+                clearTimeout(timer)
+                resetBootWaitTimer = null
+                resolve(value)
+              }
+            },
+            err => {
+              if (!settled) {
+                settled = true
+                clearTimeout(timer)
+                resetBootWaitTimer = null
+                reject(err)
+              }
+            }
+          )
+        })
 
         if (cancelled) {
           return
