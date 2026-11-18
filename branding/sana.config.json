@@ -1,0 +1,74 @@
+{
+  "$schema": "./sana.config.schema.json",
+  "productName": "SANA",
+  "fullName": "SANA",
+  "tagline": "SANA — Your Intelligent AI Assistant",
+  "shortTagline": "Your Intelligent AI Assistant",
+  "developer": "Q8iDevAI",
+  "attribution": "Developed by Q8iDevAI",
+  "upstreamAttribution": "Based on Hermes Agent by Nous Research. Customized and maintained by Q8iDevAI.",
+  "upstream": {
+    "name": "Hermes Agent",
+    "organization": "Nous Research",
+    "repository": "https://github.com/NousResearch/hermes-agent",
+    "gitUrl": "https://github.com/NousResearch/hermes-agent.git",
+    "remoteName": "upstream",
+    "license": "MIT"
+  },
+  "cli": {
+    "command": "sana",
+    "acpCommand": "sana-acp",
+    "legacyAliases": [
+      "hermes",
+      "hermes-agent",
+      "hermes-acp"
+    ],
+    "homeEnvVar": "SANA_HOME",
+    "legacyHomeEnvVar": "HERMES_HOME",
+    "dataDirName": "sana",
+    "legacyDataDirName": "hermes",
+    "promptSymbol": "❯",
+    "emblem": "✦"
+  },
+  "desktop": {
+    "displayName": "SANA",
+    "lightDisplayName": "SANA Light",
+    "bundledDisplayName": "SANA",
+    "description": "SANA — Your Intelligent AI Assistant. Developed by Q8iDevAI.",
+    "author": "Q8iDevAI",
+    "appIdPrefix": "ai.q8idev.sana",
+    "appNamePascal": "SANA",
+    "kebab": "sana",
+    "msixPublisher": "Q8iDevAI",
+    "msixIdentityName": "Q8iDevAI.SANA",
+    "msixPublisherDisplayName": "Q8iDevAI",
+    "protocolName": "SANA Protocol",
+    "protocolSchemes": [
+      "sana",
+      "hermes"
+    ],
+    "copyright": "Copyright © 2026 Q8iDevAI"
+  },
+  "installer": {
+    "productName": "SANA",
+    "identifier": "ai.q8idev.sana.setup",
+    "shortDescription": "SANA",
+    "longDescription": "Installs SANA — Your Intelligent AI Assistant, developed by Q8iDevAI.",
+    "publisher": "Q8iDevAI",
+    "copyright": "Copyright © 2026 Q8iDevAI"
+  },
+  "web": {
+    "title": "SANA — Dashboard",
+    "shortTitle": "SANA",
+    "themeColor": "#0B0B0F"
+  },
+  "theme": {
+    "black": "#0B0B0F",
+    "gold": "#D4AF37",
+    "goldBright": "#E8C967",
+    "goldDim": "#9E8022",
+    "darkSecondary": "#17171C",
+    "white": "#FFFFFF",
+    "mutedText": "#9CA3AF"
+  }
+}

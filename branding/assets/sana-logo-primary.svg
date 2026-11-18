@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" width="960" height="260">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0B0F"/>
+      <stop offset="100%" stop-color="#17171C"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="60" y1="40" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5DC86"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#9E7B1B"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="260" rx="24" fill="url(#bg)"/>
+  <rect x="2" y="2" width="956" height="256" rx="22" fill="none" stroke="#D4AF37" stroke-opacity="0.3" stroke-width="2"/>
+
+  <!-- Emblem -->
+  <g transform="translate(56, 36) scale(0.184)">
+    <circle cx="512" cy="512" r="372" fill="none" stroke="#D4AF37" stroke-opacity="0.28" stroke-width="16"/>
+    <g stroke="#D4AF37" stroke-opacity="0.55" stroke-width="14" stroke-linecap="round">
+      <line x1="696" y1="268" x2="512" y2="512"/>
+      <line x1="328" y1="756" x2="512" y2="512"/>
+    </g>
+    <path d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+      fill="none" stroke="url(#gold)" stroke-width="92" stroke-linecap="round"/>
+    <circle cx="696" cy="268" r="36" fill="#F2D77E"/>
+    <circle cx="328" cy="756" r="36" fill="#F2D77E"/>
+    <circle cx="512" cy="512" r="44" fill="#0B0B0F" stroke="#F2D77E" stroke-width="18"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="292" y="138" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="18" fill="#FFFFFF">SANA</text>
+  <text x="296" y="180" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="22" font-weight="500" letter-spacing="3" fill="#D4AF37">YOUR INTELLIGENT AI ASSISTANT</text>
+  <text x="296" y="212" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="16" font-weight="400" letter-spacing="2" fill="#9CA3AF">DEVELOPED BY Q8iDevAI</text>
+</svg>

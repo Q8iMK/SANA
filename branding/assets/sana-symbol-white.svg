@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <circle cx="512" cy="512" r="372" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="14"/>
+  <g stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="12" stroke-linecap="round">
+    <line x1="696" y1="268" x2="512" y2="512"/>
+    <line x1="328" y1="756" x2="512" y2="512"/>
+    <line x1="274" y1="358" x2="512" y2="512"/>
+    <line x1="750" y1="666" x2="512" y2="512"/>
+  </g>
+  <path
+    d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="86"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="696" cy="268" r="34" fill="#FFFFFF"/>
+  <circle cx="696" cy="268" r="14" fill="#0B0B0F"/>
+  <circle cx="328" cy="756" r="34" fill="#FFFFFF"/>
+  <circle cx="328" cy="756" r="14" fill="#0B0B0F"/>
+  <circle cx="512" cy="512" r="42" fill="#0B0B0F" stroke="#FFFFFF" stroke-width="18"/>
+  <circle cx="512" cy="512" r="14" fill="#FFFFFF"/>
+  <circle cx="274" cy="358" r="20" fill="#FFFFFF"/>
+  <circle cx="750" cy="666" r="20" fill="#FFFFFF"/>
+</svg>

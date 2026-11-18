@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="48" fill="#0B0B0F"/>
+  <rect x="4" y="4" width="504" height="504" rx="44" fill="none" stroke="#D4AF37" stroke-opacity="0.3" stroke-width="3"/>
+  <g transform="translate(128, 56) scale(0.25)">
+    <circle cx="512" cy="512" r="372" fill="none" stroke="#D4AF37" stroke-opacity="0.28" stroke-width="16"/>
+    <path d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+      fill="none" stroke="#D4AF37" stroke-width="92" stroke-linecap="round"/>
+    <circle cx="696" cy="268" r="36" fill="#F2D77E"/>
+    <circle cx="328" cy="756" r="36" fill="#F2D77E"/>
+    <circle cx="512" cy="512" r="44" fill="#0B0B0F" stroke="#F2D77E" stroke-width="18"/>
+  </g>
+  <text x="256" y="382" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="14" fill="#FFFFFF">SANA</text>
+  <text x="256" y="422" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="16" font-weight="500" letter-spacing="2.5" fill="#D4AF37">YOUR INTELLIGENT AI ASSISTANT</text>
+  <text x="256" y="454" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="13" font-weight="400" letter-spacing="2" fill="#9CA3AF">DEVELOPED BY Q8iDevAI</text>
+</svg>

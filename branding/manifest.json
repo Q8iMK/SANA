@@ -1,0 +1,124 @@
+{
+  "$schema": "./manifest.schema.json",
+  "version": 1,
+  "config": "branding/sana.config.json",
+  "assetGenerator": "branding/scripts/generate_brand_assets.py",
+  "assets": {
+    "masters": [
+      "branding/assets/sana-symbol-gold.svg",
+      "branding/assets/sana-symbol-black.svg",
+      "branding/assets/sana-symbol-white.svg",
+      "branding/assets/sana-icon-dark.svg",
+      "branding/assets/sana-icon-light.svg",
+      "branding/assets/sana-logo-primary.svg",
+      "branding/assets/sana-logo-light.svg",
+      "branding/assets/sana-logo-secondary.svg",
+      "branding/assets/sana-banner.svg",
+      "branding/assets/sana-splash.svg",
+      "branding/assets/sana-installer-sidebar.svg"
+    ],
+    "destinations": [
+      "assets/icon-master.svg",
+      "assets/icon-master-dark.svg",
+      "assets/banner.png",
+      "assets/splash.png",
+      "assets/dmg-volume.png",
+      "apps/desktop/assets/icon.png",
+      "apps/desktop/assets/icon.ico",
+      "apps/desktop/assets/icon.icns",
+      "apps/desktop/assets/icon-dark.png",
+      "apps/desktop/assets/icon-dark.ico",
+      "apps/desktop/assets/icon-dark.icns",
+      "apps/desktop/public/apple-touch-icon.png",
+      "apps/desktop/public/sana-mark.png",
+      "apps/bootstrap-installer/src-tauri/icons/icon.ico",
+      "apps/bootstrap-installer/src-tauri/icons/icon.icns",
+      "web/public/favicon.ico",
+      "web/public/favicon.svg",
+      "website/static/img/favicon.ico",
+      "website/static/img/favicon.svg"
+    ]
+  },
+  "targets": [
+    {
+      "id": "pyproject-scripts",
+      "path": "pyproject.toml",
+      "type": "toml-scripts",
+      "description": "Expose sana and sana-acp CLI entry points while preserving hermes/hermes-agent/hermes-acp aliases."
+    },
+    {
+      "id": "desktop-product-identity",
+      "path": "apps/desktop/product-identity.cjs",
+      "type": "js-identity",
+      "description": "Desktop displayName, appId, executableName, and MSIX identity."
+    },
+    {
+      "id": "desktop-package-json",
+      "path": "apps/desktop/package.json",
+      "type": "json-fields",
+      "fields": {
+        "productName": "SANA",
+        "author": "Q8iDevAI",
+        "description": "SANA — Your Intelligent AI Assistant. Developed by Q8iDevAI."
+      }
+    },
+    {
+      "id": "desktop-html",
+      "path": "apps/desktop/index.html",
+      "type": "html-title",
+      "title": "SANA"
+    },
+    {
+      "id": "web-html",
+      "path": "web/index.html",
+      "type": "html-title",
+      "title": "SANA — Dashboard"
+    },
+    {
+      "id": "installer-html",
+      "path": "apps/bootstrap-installer/index.html",
+      "type": "html-title",
+      "title": "SANA"
+    },
+    {
+      "id": "installer-tauri-conf",
+      "path": "apps/bootstrap-installer/src-tauri/tauri.conf.json",
+      "type": "json-fields",
+      "fields": {
+        "productName": "SANA",
+        "identifier": "ai.q8idev.sana.setup"
+      }
+    }
+  ],
+  "validation": {
+    "requiredFiles": [
+      "branding/sana.config.json",
+      "branding/manifest.json",
+      "branding/BRANDING.md",
+      "sana_branding.py",
+      "README.md",
+      "LICENSE"
+    ],
+    "forbiddenUserFacingPatterns": [
+      "Hermes Agent",
+      "Hermes Desktop",
+      "Built by Nous Research"
+    ],
+    "allowedTechnicalExceptions": [
+      "upstream",
+      "Based on Hermes Agent by Nous Research",
+      "Copyright (c) 2025 Nous Research",
+      "hermes_cli",
+      "hermes_constants",
+      "hermes_state",
+      "HERMES_HOME",
+      "hermes-agent",
+      "hermes.test",
+      "docs/",
+      "website/docs/",
+      "tests/",
+      "scripts/",
+      "branding/"
+    ]
+  }
+}

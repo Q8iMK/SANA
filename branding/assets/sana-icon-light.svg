@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="sanaLightBg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F3EE"/>
+    </linearGradient>
+    <linearGradient id="sanaGoldLight" x1="180" y1="160" x2="844" y2="864" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#9A7818"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="976" height="976" rx="224" ry="224" fill="url(#sanaLightBg)"/>
+  <rect x="28" y="28" width="968" height="968" rx="220" ry="220" fill="none" stroke="#D4AF37" stroke-opacity="0.4" stroke-width="8"/>
+
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#0B0B0F" stroke-opacity="0.12" stroke-width="10"/>
+  <g stroke="#D4AF37" stroke-opacity="0.55" stroke-width="10" stroke-linecap="round">
+    <line x1="678" y1="292" x2="512" y2="512"/>
+    <line x1="346" y1="732" x2="512" y2="512"/>
+    <line x1="296" y1="374" x2="512" y2="512"/>
+    <line x1="728" y1="650" x2="512" y2="512"/>
+  </g>
+
+  <path
+    d="M 666 306 C 618 244, 536 226, 450 238 C 350 250, 290 310, 290 384 C 290 462, 360 496, 512 512 C 664 528, 734 562, 734 640 C 734 716, 668 776, 568 788 C 476 800, 396 776, 352 718"
+    fill="none"
+    stroke="#0B0B0F"
+    stroke-width="78"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M 666 306 C 618 244, 536 226, 450 238 C 350 250, 290 310, 290 384 C 290 462, 360 496, 512 512 C 664 528, 734 562, 734 640 C 734 716, 668 776, 568 788 C 476 800, 396 776, 352 718"
+    fill="none"
+    stroke="url(#sanaGoldLight)"
+    stroke-opacity="0.5"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+
+  <circle cx="678" cy="292" r="30" fill="#D4AF37"/>
+  <circle cx="678" cy="292" r="12" fill="#FFFFFF"/>
+  <circle cx="346" cy="732" r="30" fill="#D4AF37"/>
+  <circle cx="346" cy="732" r="12" fill="#FFFFFF"/>
+  <circle cx="512" cy="512" r="38" fill="#FFFFFF" stroke="#D4AF37" stroke-width="16"/>
+  <circle cx="512" cy="512" r="12" fill="#0B0B0F"/>
+  <circle cx="296" cy="374" r="18" fill="#0B0B0F"/>
+  <circle cx="728" cy="650" r="18" fill="#0B0B0F"/>
+</svg>

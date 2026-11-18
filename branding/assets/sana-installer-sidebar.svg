@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 314" width="164" height="314">
+  <rect width="164" height="314" fill="#0B0B0F"/>
+  <rect x="0" y="0" width="164" height="314" fill="none" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="2"/>
+  <g transform="translate(26, 56) scale(0.11)">
+    <circle cx="512" cy="512" r="372" fill="none" stroke="#D4AF37" stroke-opacity="0.3" stroke-width="16"/>
+    <path d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+      fill="none" stroke="#D4AF37" stroke-width="92" stroke-linecap="round"/>
+    <circle cx="696" cy="268" r="36" fill="#F2D77E"/>
+    <circle cx="328" cy="756" r="36" fill="#F2D77E"/>
+    <circle cx="512" cy="512" r="44" fill="#0B0B0F" stroke="#F2D77E" stroke-width="18"/>
+  </g>
+  <text x="82" y="210" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="5" fill="#FFFFFF">SANA</text>
+  <text x="82" y="236" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="9" font-weight="500" letter-spacing="1.2" fill="#D4AF37">AI ASSISTANT</text>
+  <text x="82" y="284" text-anchor="middle" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="9" font-weight="400" letter-spacing="1" fill="#9CA3AF">Q8iDevAI</text>
+</svg>

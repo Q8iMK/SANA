@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" width="1280" height="360">
+  <defs>
+    <linearGradient id="bannerBg" x1="0" y1="0" x2="1280" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0B0F"/>
+      <stop offset="55%" stop-color="#131318"/>
+      <stop offset="100%" stop-color="#17171C"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="24%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldStroke" x1="160" y1="60" x2="360" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5DC86"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#9E7B1B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="360" rx="20" fill="url(#bannerBg)"/>
+  <rect width="1280" height="360" rx="20" fill="url(#goldGlow)"/>
+  <rect x="2" y="2" width="1276" height="356" rx="18" fill="none" stroke="#D4AF37" stroke-opacity="0.32" stroke-width="2"/>
+
+  <!-- Subtle architectural grid / network lines on right -->
+  <g stroke="#D4AF37" stroke-opacity="0.12" stroke-width="1.5">
+    <line x1="880" y1="40" x2="1180" y2="120"/>
+    <line x1="940" y1="280" x2="1180" y2="120"/>
+    <line x1="1020" y1="70" x2="1220" y2="260"/>
+    <line x1="860" y1="190" x2="1220" y2="260"/>
+  </g>
+  <g fill="#D4AF37" fill-opacity="0.35">
+    <circle cx="880" cy="40" r="4"/>
+    <circle cx="1180" cy="120" r="5"/>
+    <circle cx="940" cy="280" r="4"/>
+    <circle cx="1020" cy="70" r="4"/>
+    <circle cx="1220" cy="260" r="5"/>
+    <circle cx="860" cy="190" r="4"/>
+  </g>
+
+  <!-- Primary SANA Emblem -->
+  <g transform="translate(110, 52) scale(0.25)">
+    <circle cx="512" cy="512" r="372" fill="none" stroke="#D4AF37" stroke-opacity="0.3" stroke-width="14"/>
+    <circle cx="512" cy="512" r="326" fill="none" stroke="#D4AF37" stroke-opacity="0.16" stroke-width="6" stroke-dasharray="16 20"/>
+    <g stroke="#D4AF37" stroke-opacity="0.55" stroke-width="12" stroke-linecap="round">
+      <line x1="696" y1="268" x2="512" y2="512"/>
+      <line x1="328" y1="756" x2="512" y2="512"/>
+      <line x1="274" y1="358" x2="512" y2="512"/>
+      <line x1="750" y1="666" x2="512" y2="512"/>
+    </g>
+    <path d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+      fill="none" stroke="url(#goldStroke)" stroke-width="88" stroke-linecap="round"/>
+    <circle cx="696" cy="268" r="34" fill="#F2D77E"/>
+    <circle cx="696" cy="268" r="14" fill="#0B0B0F"/>
+    <circle cx="328" cy="756" r="34" fill="#F2D77E"/>
+    <circle cx="328" cy="756" r="14" fill="#0B0B0F"/>
+    <circle cx="512" cy="512" r="42" fill="#0B0B0F" stroke="#F2D77E" stroke-width="18"/>
+    <circle cx="512" cy="512" r="14" fill="#FFF3C4"/>
+  </g>
+
+  <!-- Title & Tagline -->
+  <text x="410" y="168" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="112" font-weight="700" letter-spacing="22" fill="#FFFFFF">SANA</text>
+  <line x1="414" y1="194" x2="860" y2="194" stroke="#D4AF37" stroke-opacity="0.5" stroke-width="2"/>
+  <text x="414" y="236" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="26" font-weight="500" letter-spacing="4" fill="#D4AF37">YOUR INTELLIGENT AI ASSISTANT</text>
+  <text x="414" y="276" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="18" font-weight="400" letter-spacing="2.5" fill="#9CA3AF">DEVELOPED BY Q8iDevAI</text>
+</svg>

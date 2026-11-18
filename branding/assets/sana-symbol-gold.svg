@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="sanaGoldGrad" x1="160" y1="140" x2="864" y2="884" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2D77E"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#A6821E"/>
+    </linearGradient>
+    <linearGradient id="sanaGoldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE89C"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <!-- Subtle outer orbital intelligence ring -->
+  <circle cx="512" cy="512" r="372" fill="none" stroke="#D4AF37" stroke-opacity="0.28" stroke-width="14"/>
+  <circle cx="512" cy="512" r="328" fill="none" stroke="#D4AF37" stroke-opacity="0.14" stroke-width="6" stroke-dasharray="18 22"/>
+
+  <!-- Neural network filaments -->
+  <g stroke="#D4AF37" stroke-opacity="0.55" stroke-width="12" stroke-linecap="round">
+    <line x1="696" y1="268" x2="512" y2="512"/>
+    <line x1="328" y1="756" x2="512" y2="512"/>
+    <line x1="274" y1="358" x2="512" y2="512"/>
+    <line x1="750" y1="666" x2="512" y2="512"/>
+  </g>
+
+  <!-- Stylized geometric S ribbon -->
+  <path
+    d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+    fill="none"
+    stroke="url(#sanaGoldGrad)"
+    stroke-width="86"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner precision highlight along S -->
+  <path
+    d="M 684 282 C 632 214, 540 194, 444 206 C 334 220, 266 286, 266 368 C 266 456, 344 494, 512 512 C 680 530, 758 568, 758 656 C 758 742, 684 808, 574 820 C 472 832, 382 806, 332 742"
+    fill="none"
+    stroke="#FFF3C4"
+    stroke-opacity="0.35"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+
+  <!-- Intelligent network nodes -->
+  <circle cx="696" cy="268" r="34" fill="url(#sanaGoldAccent)"/>
+  <circle cx="696" cy="268" r="14" fill="#0B0B0F"/>
+
+  <circle cx="328" cy="756" r="34" fill="url(#sanaGoldAccent)"/>
+  <circle cx="328" cy="756" r="14" fill="#0B0B0F"/>
+
+  <circle cx="512" cy="512" r="42" fill="#0B0B0F" stroke="url(#sanaGoldAccent)" stroke-width="18"/>
+  <circle cx="512" cy="512" r="14" fill="#FFF3C4"/>
+
+  <circle cx="274" cy="358" r="20" fill="#D4AF37"/>
+  <circle cx="750" cy="666" r="20" fill="#D4AF37"/>
+</svg>
