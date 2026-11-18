@@ -1050,6 +1050,10 @@ export function useGatewayBoot({
       onBootProgress(payload)
     })
 
+    const offBootstrapEvent = desktop.onBootstrapEvent?.(() => {
+      resetBootWaitTimer?.()
+    })
+
     void desktop
       .getBootProgress()
       .then(snapshot => {
@@ -1840,6 +1844,7 @@ export function useGatewayBoot({
       offExit()
       offWindowState?.()
       offBootProgress()
+      offBootstrapEvent?.()
 
       // HMR teardown vs. real unmount. On a hot update we must NOT close the
       // socket — that's the whole bug. Detach this instance's listeners (their
