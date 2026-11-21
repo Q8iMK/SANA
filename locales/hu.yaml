@@ -546,7 +546,7 @@ gateway:
     timed_out: "❌ A Hermes frissítése 30 perc után időtúllépéssel leállt."
     finished_success: "✅ A Hermes frissítése sikeresen befejeződött."
     last_lines: "{msg}\n\nUtolsó sorok:\n```\n{tail}\n```"
-    managed_action: "a Hermes Agent frissítése"
+    managed_action: "a SANA frissítése"
     not_applicable: "✗ A `hermes update` nem alkalmazható erre a telepítésre ({method}).\nFrissítés így: {command}"
   usage:
     rate_limits: "⏱️ **Sebességkorlátok:** {state}"
@@ -1520,13 +1520,13 @@ platform:
       size_downgraded: "{label} mérete ({size_mb} MB) meghaladja a {cap} korlátot; fájlként küldtem el helyette."
   email:
     image_line: "Kép: {url}"
-    standalone_subject: "Hermes Agent"
+    standalone_subject: "SANA"
   dingtalk:
     emotion:
       thinking: "🤔Gondolkodom"
       done: "🥳Kész"
   irc:
-    quit_message: "Hermes Agent leáll"
+    quit_message: "SANA leáll"
     standalone_quit: "kézbesítve"
   relay:
     confirm_approve_once: "Jóváhagyás egyszer"
@@ -1550,7 +1550,7 @@ slash:
   sethome:
     description: "Ez a csevegés legyen az otthoni csatorna"
   update:
-    description: "Hermes Agent frissítése a legújabb verzióra"
+    description: "SANA frissítése a legújabb verzióra"
   category:
     session: "Munkamenet"
     configuration: "Konfiguráció"
@@ -1758,7 +1758,7 @@ slash:
   image:
     description: "Helyi képfájl csatolása a következő promptodhoz"
   version:
-    description: "A Hermes Agent verziójának megjelenítése"
+    description: "A SANA verziójának megjelenítése"
   debug:
     description: "Hibakeresési jelentés (verziók, konfigurációs kulcsok, hibaszámok; naplószöveg nélkül): előbb az adatvédelmi tájékoztató; a /debug upload linkeket oszt meg"
   quit:
@@ -2321,7 +2321,7 @@ cli:
   render:
     response_transformed: "[A válasz a streamelés után átalakult]"
     banner_tagline: "{name} - AI-ügynök keretrendszer"
-    banner_version: "Hermes Agent v{version} ({date})"
+    banner_version: "SANA v{version} ({date})"
   subagents:
     cannot_steer_process: "Háttérfolyamatok nem irányíthatók; állítsd le őket, vagy olvasd el a naplót."
     count_live: "{count} élő"
@@ -3199,12 +3199,12 @@ cli:
       usage: "/timestamps [on|off|status]"
       label: "Üzenet-időbélyegek"
     update:
-      managed_action: "a Hermes Agent frissítése"
+      managed_action: "a SANA frissítése"
       choice_update: "Frissítés most"
-      choice_update_desc: "kilépés a jelenlegi munkamenetből és a Hermes Agent frissítése"
+      choice_update_desc: "kilépés a jelenlegi munkamenetből és a SANA frissítése"
       choice_cancel: "Mégse"
       choice_cancel_desc: "a jelenlegi munkamenet megtartása"
-      title: "☤  Hermes Agent frissítése"
+      title: "☤  SANA frissítése"
       detail: "Ez kilép a jelenlegi munkamenetből, és lefuttatja a `hermes update` parancsot."
       cancelled: "🟡 /update megszakítva."
       launching: "☤ Frissítés indítása..."

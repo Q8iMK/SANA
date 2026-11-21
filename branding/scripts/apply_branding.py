@@ -210,6 +210,41 @@ def _rebrand_i18n_files(*, check: bool, report: BrandingReport) -> None:
                 path.write_text("".join(out), encoding="utf-8")
                 report.updated.append(rel)
 
+    # Also rebrand CLI/TUI YAML locale files in locales/ (preserving external Nous Portal page labels)
+    locales_dir = REPO_ROOT / "locales"
+    portal_keys = (
+        "remoteSpendingOff:",
+        "remoteSpendingDisabled:",
+        "killswitch_reason_overview:",
+        "killswitch_reason_buy:",
+        "charge_error_remote_spending_disabled:",
+        "allowed_but_org_off:",
+    )
+    if locales_dir.is_dir():
+        for path in sorted(locales_dir.glob("*.yaml")):
+            orig = path.read_text(encoding="utf-8")
+            lines = orig.splitlines(keepends=True)
+            out_yaml: list[str] = []
+            changed = False
+            for line in lines:
+                s = line.lstrip()
+                if s.startswith("#") or any(pk in line for pk in portal_keys):
+                    out_yaml.append(line)
+                    continue
+                new_line = re.sub(r"\bHermes Desktop\b", "SANA", line)
+                new_line = re.sub(r"\bHermes Agent\b", "SANA", new_line)
+                if new_line != line:
+                    changed = True
+                out_yaml.append(new_line)
+            if not changed:
+                continue
+            rel = str(path.relative_to(REPO_ROOT))
+            if check:
+                report.conflicts.append(f"{rel}: contains unbranded locale display strings")
+            else:
+                path.write_text("".join(out_yaml), encoding="utf-8")
+                report.updated.append(rel)
+
 
 def _audit_user_facing_surfaces(manifest: dict[str, Any], report: BrandingReport) -> None:
     """Scan primary user-facing entry files for unattributed upstream branding."""
@@ -226,6 +261,7 @@ def _audit_user_facing_surfaces(manifest: dict[str, Any], report: BrandingReport
         REPO_ROOT / "setup-sana.ps1",
         REPO_ROOT / "setup-sana.sh",
         REPO_ROOT / "website" / "docusaurus.config.ts",
+        REPO_ROOT / "apps" / "desktop" / "README.md",
         REPO_ROOT / "apps" / "desktop" / "index.html",
         REPO_ROOT / "apps" / "desktop" / "package.json",
         REPO_ROOT / "apps" / "desktop" / "electron-builder.config.cjs",
@@ -242,6 +278,7 @@ def _audit_user_facing_surfaces(manifest: dict[str, Any], report: BrandingReport
         REPO_ROOT / "apps" / "bootstrap-installer" / "src-tauri" / "tauri.conf.json",
         REPO_ROOT / "apps" / "bootstrap-installer" / "src-tauri" / "hermes-setup.manifest",
         REPO_ROOT / "apps" / "bootstrap-installer" / "src-tauri" / "src" / "install_script.rs",
+        REPO_ROOT / "web" / "README.md",
         REPO_ROOT / "web" / "index.html",
         REPO_ROOT / "web" / "src" / "pages" / "ChannelsPage.tsx",
         REPO_ROOT / "hermes_cli" / "setup.py",

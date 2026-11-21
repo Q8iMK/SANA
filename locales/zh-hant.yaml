@@ -543,7 +543,7 @@ gateway:
     timed_out: "❌ Hermes 更新已逾時（30 分鐘）。"
     finished_success: "✅ Hermes 更新已成功完成。"
     last_lines: "{msg}\n\n最後幾行：\n```\n{tail}\n```"
-    managed_action: "更新 Hermes Agent"
+    managed_action: "更新 SANA"
     not_applicable: "✗ `hermes update` 不適用於此安裝方式（{method}）。\n請改用：{command}"
   usage:
     rate_limits: "⏱️ **速率限制：** {state}"
@@ -1503,13 +1503,13 @@ platform:
       size_downgraded: "{label}大小 {size_mb}MB 超過 {cap} 上限；已改以檔案傳送。"
   email:
     image_line: "圖片：{url}"
-    standalone_subject: "Hermes Agent"
+    standalone_subject: "SANA"
   dingtalk:
     emotion:
       thinking: "🤔思考中"
       done: "🥳完成"
   irc:
-    quit_message: "Hermes Agent 正在關閉"
+    quit_message: "SANA 正在關閉"
     standalone_quit: "已傳送"
   relay:
     confirm_approve_once: "批准一次"
@@ -1533,7 +1533,7 @@ slash:
   sethome:
     description: "將此聊天設為主頻道"
   update:
-    description: "將 Hermes Agent 更新到最新版本"
+    description: "將 SANA 更新到最新版本"
   category:
     session: "工作階段"
     configuration: "設定"
@@ -1741,7 +1741,7 @@ slash:
   image:
     description: "為下一則提示附加本機圖片檔案"
   version:
-    description: "顯示 Hermes Agent 版本"
+    description: "顯示 SANA 版本"
   debug:
     description: "除錯報告（版本、設定鍵名、錯誤計數；不含日誌文字）：先顯示隱私聲明；/debug upload 分享連結"
   quit:
@@ -2223,7 +2223,7 @@ cli:
     images_attached_one: "📎 已附加 {count} 張圖片"
     images_attached_other: "📎 已附加 {count} 張圖片"
     command_interrupted: "指令已中斷。"
-    welcome: "歡迎使用 Hermes Agent！輸入訊息開始，或輸入 /help 查看指令。"
+    welcome: "歡迎使用 SANA！輸入訊息開始，或輸入 /help 查看指令。"
     vscode_images_hint: "VS Code 可以在這裡以完整解析度顯示圖片：請在設定中開啟 terminal.integrated.enableImages。"
     activated_skills_label: "已啟用的技能："
     redaction_disabled_title: "⚠  機密遮蔽已停用"
@@ -2304,7 +2304,7 @@ cli:
   render:
     response_transformed: "[回應在串流結束後已轉換]"
     banner_tagline: "{name} - AI 代理框架"
-    banner_version: "Hermes Agent v{version}（{date}）"
+    banner_version: "SANA v{version}（{date}）"
   subagents:
     cannot_steer_process: "背景程序無法引導；請停止它或查看日誌。"
     count_live: "{count} 個進行中"
@@ -3182,12 +3182,12 @@ cli:
       usage: "/timestamps [on|off|status]"
       label: "訊息時間戳記"
     update:
-      managed_action: "更新 Hermes Agent"
+      managed_action: "更新 SANA"
       choice_update: "立即更新"
-      choice_update_desc: "離開目前的工作階段並更新 Hermes Agent"
+      choice_update_desc: "離開目前的工作階段並更新 SANA"
       choice_cancel: "取消"
       choice_cancel_desc: "保留目前的工作階段"
-      title: "☤  更新 Hermes Agent"
+      title: "☤  更新 SANA"
       detail: "這會離開目前的工作階段並執行 `hermes update`。"
       cancelled: "🟡 /update 已取消。"
       launching: "☤ 正在啟動更新…"
@@ -3207,7 +3207,7 @@ cli:
     fix_lm_studio: "LM Studio 修正方式：在模型設定中調整上下文長度 → 重新載入模型"
     fix_local_server: "修正方式：以至少 {tokens_k}K 上下文啟動你的伺服器（llama.cpp：-c {tokens}），或在 config.yaml 設定 model.ollama_num_ctx 為實際提供的視窗大小"
     fix_config: "修正方式：在 config.yaml 設定 model.context_length，或調高伺服器的上下文設定"
-    hermes_models_not_agentic: "⚠  Nous Research 的 Hermes 3 與 4 模型「不是」代理型模型，也並非為 Hermes Agent 而設計。"
+    hermes_models_not_agentic: "⚠  Nous Research 的 Hermes 3 與 4 模型「不是」代理型模型，也並非為 SANA 而設計。"
     hermes_models_lack_tools: "它們缺少代理工作流程所需的工具呼叫能力。建議改用代理型模型（Claude、GPT、Gemini、DeepSeek 等）。"
     hermes_models_switch_hint: "切換方式：/model sonnet  或  /model gpt5"
     project_skills_loaded: "◆ 已從此儲存庫載入 {count} 個專案技能"

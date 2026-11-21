@@ -543,7 +543,7 @@ gateway:
     timed_out: "❌ Chuaigh nuashonrú Hermes thar am tar éis 30 nóiméad."
     finished_success: "✅ Críochnaíodh nuashonrú Hermes go rathúil."
     last_lines: "{msg}\n\nLínte deiridh:\n```\n{tail}\n```"
-    managed_action: "Hermes Agent a nuashonrú"
+    managed_action: "SANA a nuashonrú"
     not_applicable: "✗ Ní bhaineann `hermes update` leis an suiteáil seo ({method}).\nNuashonraigh le: {command}"
   usage:
     rate_limits: "⏱️ **Teorainneacha Ráta:** {state}"
@@ -1503,13 +1503,13 @@ platform:
       size_downgraded: "Sáraíonn méid {label} {size_mb}MB an teorainn {cap}; seoladh mar chomhad ina ionad."
   email:
     image_line: "Íomhá: {url}"
-    standalone_subject: "Hermes Agent"
+    standalone_subject: "SANA"
   dingtalk:
     emotion:
       thinking: "🤔Ag smaoineamh"
       done: "🥳Déanta"
   irc:
-    quit_message: "Hermes Agent ag múchadh"
+    quit_message: "SANA ag múchadh"
     standalone_quit: "seachadta"
   relay:
     confirm_approve_once: "Ceadaigh uair amháin"
@@ -1533,7 +1533,7 @@ slash:
   sethome:
     description: "Socraigh an comhrá seo mar an cainéal baile"
   update:
-    description: "Nuashonraigh Hermes Agent go dtí an leagan is déanaí"
+    description: "Nuashonraigh SANA go dtí an leagan is déanaí"
   category:
     session: "Seisiún"
     configuration: "Cumraíocht"
@@ -1741,7 +1741,7 @@ slash:
   image:
     description: "Ceangail comhad íomhá logánta do do chéad leid eile"
   version:
-    description: "Taispeáin leagan Hermes Agent"
+    description: "Taispeáin leagan SANA"
   debug:
     description: "Tuarascáil dhífhabhtaithe (leaganacha, eochracha cumraíochta, comhaireamh earráidí; gan téacs loga): taispeántar an fógra príobháideachta ar dtús; roinneann /debug upload naisc"
   quit:
@@ -2223,7 +2223,7 @@ cli:
     images_attached_one: "📎 {count} íomhá ceangailte"
     images_attached_other: "📎 {count} íomhá ceangailte"
     command_interrupted: "Briseadh isteach ar an ordú."
-    welcome: "Fáilte go Hermes Agent! Clóscríobh do theachtaireacht nó /help le haghaidh orduithe."
+    welcome: "Fáilte go SANA! Clóscríobh do theachtaireacht nó /help le haghaidh orduithe."
     vscode_images_hint: "Is féidir le VS Code íomhánna lánrúin a thaispeáint anseo: cas air terminal.integrated.enableImages sna socruithe."
     activated_skills_label: "Scileanna gníomhachtaithe:"
     redaction_disabled_title: "⚠  Tá ceilt rún DÍCHUMASAITHE"
@@ -2304,7 +2304,7 @@ cli:
   render:
     response_transformed: "[Freagra claochlaithe tar éis an tsruthaithe]"
     banner_tagline: "{name} - Creatlach Gníomhaire IS"
-    banner_version: "Hermes Agent v{version} ({date})"
+    banner_version: "SANA v{version} ({date})"
   subagents:
     cannot_steer_process: "Ní féidir próisis chúlra a stiúradh; stop iad nó léigh an loga."
     count_live: "{count} beo"
@@ -3182,12 +3182,12 @@ cli:
       usage: "/timestamps [on|off|status]"
       label: "Stampaí ama teachtaireachtaí"
     update:
-      managed_action: "nuashonraigh Hermes Agent"
+      managed_action: "nuashonraigh SANA"
       choice_update: "Nuashonraigh Anois"
-      choice_update_desc: "scoir den seisiún reatha agus nuashonraigh Hermes Agent"
+      choice_update_desc: "scoir den seisiún reatha agus nuashonraigh SANA"
       choice_cancel: "Cealaigh"
       choice_cancel_desc: "coinnigh an seisiún reatha"
-      title: "☤  Nuashonraigh Hermes Agent"
+      title: "☤  Nuashonraigh SANA"
       detail: "Scoirfidh sé seo den seisiún reatha agus rithfidh sé `hermes update`."
       cancelled: "🟡 /update cealaithe."
       launching: "☤ Ag lainseáil an nuashonraithe..."
@@ -3207,7 +3207,7 @@ cli:
     fix_lm_studio: "Leigheas LM Studio: Socraigh fad an chomhthéacs i socruithe na samhla → athlódáil an tsamhail"
     fix_local_server: "Leigheas: tosaigh do fhreastalaí le comhthéacs {tokens_k}K ar a laghad (llama.cpp: -c {tokens}), nó socraigh model.ollama_num_ctx in config.yaml don fhuinneog a fhreastalaíonn sé i ndáiríre"
     fix_config: "Leigheas: Socraigh model.context_length in config.yaml, nó méadaigh socrú comhthéacs do fhreastalaí"
-    hermes_models_not_agentic: "⚠  NÍL samhlacha Hermes 3 & 4 de chuid Nous Research gníomhaireach agus níl siad deartha le húsáid le Hermes Agent."
+    hermes_models_not_agentic: "⚠  NÍL samhlacha Hermes 3 & 4 de chuid Nous Research gníomhaireach agus níl siad deartha le húsáid le SANA."
     hermes_models_lack_tools: "Níl na cumais glaonna uirlisí acu a theastaíonn do shreafaí oibre gníomhaire. Smaoinigh ar shamhail ghníomhaireach a úsáid (Claude, GPT, Gemini, DeepSeek, etc.)."
     hermes_models_switch_hint: "Athraigh le: /model sonnet  nó  /model gpt5"
     project_skills_loaded: "◆ {count} scil(eanna) tionscadail lódáilte ón stór seo"

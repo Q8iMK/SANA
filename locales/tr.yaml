@@ -543,7 +543,7 @@ gateway:
     timed_out: "❌ Hermes güncellemesi 30 dakika sonra zaman aşımına uğradı."
     finished_success: "✅ Hermes güncellemesi başarıyla tamamlandı."
     last_lines: "{msg}\n\nSon satırlar:\n```\n{tail}\n```"
-    managed_action: "Hermes Agent'ı güncelle"
+    managed_action: "SANA'ı güncelle"
     not_applicable: "✗ `hermes update` bu kuruluma uygulanamaz ({method}).\nŞununla güncelleyin: {command}"
   usage:
     rate_limits: "⏱️ **Hız Sınırları:** {state}"
@@ -1503,13 +1503,13 @@ platform:
       size_downgraded: "{label} boyutu ({size_mb}MB) {cap} sınırını aşıyor; bunun yerine dosya olarak gönderildi."
   email:
     image_line: "Görüntü: {url}"
-    standalone_subject: "Hermes Agent"
+    standalone_subject: "SANA"
   dingtalk:
     emotion:
       thinking: "🤔Düşünüyor"
       done: "🥳Tamamlandı"
   irc:
-    quit_message: "Hermes Agent kapatılıyor"
+    quit_message: "SANA kapatılıyor"
     standalone_quit: "teslim edildi"
   relay:
     confirm_approve_once: "Bir Kez Onayla"
@@ -1533,7 +1533,7 @@ slash:
   sethome:
     description: "Bu sohbeti ana kanal olarak ayarla"
   update:
-    description: "Hermes Agent'ı en son sürüme güncelle"
+    description: "SANA'ı en son sürüme güncelle"
   category:
     session: "Oturum"
     configuration: "Yapılandırma"
@@ -1741,7 +1741,7 @@ slash:
   image:
     description: "Sonraki isteminiz için yerel bir görsel dosyası ekle"
   version:
-    description: "Hermes Agent sürümünü göster"
+    description: "SANA sürümünü göster"
   debug:
     description: "Hata ayıklama raporu (sürümler, yapılandırma anahtarları, hata sayıları; günlük metni yok): önce gizlilik bildirimini gösterir; /debug upload bağlantı paylaşır"
   quit:
@@ -2223,7 +2223,7 @@ cli:
     images_attached_one: "📎 {count} görsel eklendi"
     images_attached_other: "📎 {count} görsel eklendi"
     command_interrupted: "Komut kesildi."
-    welcome: "Hermes Agent'a hoş geldiniz! Mesajınızı yazın veya komutlar için /help kullanın."
+    welcome: "SANA'a hoş geldiniz! Mesajınızı yazın veya komutlar için /help kullanın."
     vscode_images_hint: "VS Code burada görüntüleri tam çözünürlükte gösterebilir: ayarlarda terminal.integrated.enableImages seçeneğini açın."
     activated_skills_label: "Etkinleştirilen skill'ler:"
     redaction_disabled_title: "⚠  Gizli anahtar maskeleme DEVRE DIŞI"
@@ -2304,7 +2304,7 @@ cli:
   render:
     response_transformed: "[Yanıt akıştan sonra dönüştürüldü]"
     banner_tagline: "{name} - Yapay Zekâ Ajan Çerçevesi"
-    banner_version: "Hermes Agent v{version} ({date})"
+    banner_version: "SANA v{version} ({date})"
   subagents:
     cannot_steer_process: "Arka plan süreçleri yönlendirilemez; durdurun veya günlüğü okuyun."
     count_live: "{count} canlı"
@@ -3182,12 +3182,12 @@ cli:
       usage: "/timestamps [on|off|status]"
       label: "Mesaj zaman damgaları"
     update:
-      managed_action: "Hermes Agent'ı güncelle"
+      managed_action: "SANA'ı güncelle"
       choice_update: "Şimdi Güncelle"
-      choice_update_desc: "geçerli oturumdan çıkıp Hermes Agent'ı güncelle"
+      choice_update_desc: "geçerli oturumdan çıkıp SANA'ı güncelle"
       choice_cancel: "İptal"
       choice_cancel_desc: "geçerli oturumu koru"
-      title: "☤  Hermes Agent'ı Güncelle"
+      title: "☤  SANA'ı Güncelle"
       detail: "Bu işlem geçerli oturumdan çıkar ve `hermes update` komutunu çalıştırır."
       cancelled: "🟡 /update iptal edildi."
       launching: "☤ Güncelleme başlatılıyor..."
@@ -3207,7 +3207,7 @@ cli:
     fix_lm_studio: "LM Studio çözümü: Model ayarlarında bağlam uzunluğunu belirleyin → modeli yeniden yükleyin"
     fix_local_server: "Çözüm: sunucunuzu en az {tokens_k}K bağlamla başlatın (llama.cpp: -c {tokens}) veya config.yaml içinde model.ollama_num_ctx değerini gerçekten sunduğu pencereye ayarlayın"
     fix_config: "Çözüm: config.yaml içinde model.context_length değerini ayarlayın veya sunucunuzun bağlam ayarını artırın"
-    hermes_models_not_agentic: "⚠  Nous Research Hermes 3 ve 4 modelleri ajan modeli DEĞİLDİR ve Hermes Agent ile kullanılmak üzere tasarlanmamıştır."
+    hermes_models_not_agentic: "⚠  Nous Research Hermes 3 ve 4 modelleri ajan modeli DEĞİLDİR ve SANA ile kullanılmak üzere tasarlanmamıştır."
     hermes_models_lack_tools: "Ajan iş akışları için gereken araç çağırma yeteneklerinden yoksundurlar. Ajan yetenekli bir model (Claude, GPT, Gemini, DeepSeek vb.) kullanmayı düşünün."
     hermes_models_switch_hint: "Şununla geçiş yapın: /model sonnet  veya  /model gpt5"
     project_skills_loaded: "◆ Bu depodan {count} proje skill'i yüklendi"

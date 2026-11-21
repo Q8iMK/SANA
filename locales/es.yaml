@@ -543,7 +543,7 @@ gateway:
     timed_out: "❌ La actualización de Hermes expiró tras 30 minutos."
     finished_success: "✅ La actualización de Hermes terminó correctamente."
     last_lines: "{msg}\n\nÚltimas líneas:\n```\n{tail}\n```"
-    managed_action: "actualizar Hermes Agent"
+    managed_action: "actualizar SANA"
     not_applicable: "✗ `hermes update` no aplica a esta instalación ({method}).\nActualiza con: {command}"
   usage:
     rate_limits: "⏱️ **Límites de tasa:** {state}"
@@ -1503,13 +1503,13 @@ platform:
       size_downgraded: "{label} pesa {size_mb}MB y supera el límite de {cap}; se envió como archivo."
   email:
     image_line: "Imagen: {url}"
-    standalone_subject: "Hermes Agent"
+    standalone_subject: "SANA"
   dingtalk:
     emotion:
       thinking: "🤔Pensando"
       done: "🥳Listo"
   irc:
-    quit_message: "Hermes Agent se está apagando"
+    quit_message: "SANA se está apagando"
     standalone_quit: "entregado"
   relay:
     confirm_approve_once: "Aprobar una vez"
@@ -1533,7 +1533,7 @@ slash:
   sethome:
     description: "Establecer este chat como canal principal"
   update:
-    description: "Actualizar Hermes Agent a la última versión"
+    description: "Actualizar SANA a la última versión"
   category:
     session: "Sesión"
     configuration: "Configuración"
@@ -1741,7 +1741,7 @@ slash:
   image:
     description: "Adjuntar un archivo de imagen local para tu próximo prompt"
   version:
-    description: "Mostrar la versión de Hermes Agent"
+    description: "Mostrar la versión de SANA"
   debug:
     description: "Informe de depuración (versiones, claves de configuración, recuentos de errores; sin texto de registros): muestra primero el aviso de privacidad; /debug upload comparte enlaces"
   quit:
@@ -2223,7 +2223,7 @@ cli:
     images_attached_one: "📎 {count} imagen adjunta"
     images_attached_other: "📎 {count} imágenes adjuntas"
     command_interrupted: "Comando interrumpido."
-    welcome: "¡Bienvenido a Hermes Agent! Escribe tu mensaje o /help para ver los comandos."
+    welcome: "¡Bienvenido a SANA! Escribe tu mensaje o /help para ver los comandos."
     vscode_images_hint: "VS Code puede mostrar aquí imágenes a resolución completa: activa terminal.integrated.enableImages en la configuración."
     activated_skills_label: "Skills activadas:"
     redaction_disabled_title: "⚠  La redacción de secretos está DESACTIVADA"
@@ -2304,7 +2304,7 @@ cli:
   render:
     response_transformed: "[Respuesta transformada después del streaming]"
     banner_tagline: "{name} - Framework de agentes de IA"
-    banner_version: "Hermes Agent v{version} ({date})"
+    banner_version: "SANA v{version} ({date})"
   subagents:
     cannot_steer_process: "Los procesos en segundo plano no se pueden redirigir; deténlos o lee el registro."
     count_live: "{count} activos"
@@ -3182,12 +3182,12 @@ cli:
       usage: "/timestamps [on|off|status]"
       label: "Marcas de tiempo de los mensajes"
     update:
-      managed_action: "actualizar Hermes Agent"
+      managed_action: "actualizar SANA"
       choice_update: "Actualizar ahora"
-      choice_update_desc: "salir de la sesión actual y actualizar Hermes Agent"
+      choice_update_desc: "salir de la sesión actual y actualizar SANA"
       choice_cancel: "Cancelar"
       choice_cancel_desc: "mantener la sesión actual"
-      title: "☤  Actualizar Hermes Agent"
+      title: "☤  Actualizar SANA"
       detail: "Esto cerrará la sesión actual y ejecutará `hermes update`."
       cancelled: "🟡 /update cancelado."
       launching: "☤ Iniciando la actualización..."
@@ -3207,7 +3207,7 @@ cli:
     fix_lm_studio: "Solución LM Studio: ajusta el contexto en los ajustes del modelo → recárgalo"
     fix_local_server: "Solución: inicia tu servidor con al menos {tokens_k}K de contexto (llama.cpp: -c {tokens}), o define model.ollama_num_ctx en config.yaml con la ventana que realmente sirve"
     fix_config: "Solución: define model.context_length en config.yaml, o aumenta el ajuste de contexto de tu servidor"
-    hermes_models_not_agentic: "⚠  Los modelos Hermes 3 y 4 de Nous Research NO son agénticos y no están diseñados para usarse con Hermes Agent."
+    hermes_models_not_agentic: "⚠  Los modelos Hermes 3 y 4 de Nous Research NO son agénticos y no están diseñados para usarse con SANA."
     hermes_models_lack_tools: "Carecen de la capacidad de llamar herramientas que requieren los flujos de trabajo del agente. Considera usar un modelo agéntico (Claude, GPT, Gemini, DeepSeek, etc.)."
     hermes_models_switch_hint: "Cambia con: /model sonnet  o  /model gpt5"
     project_skills_loaded: "◆ {count} skill(s) del proyecto cargada(s) desde este repositorio"

@@ -1,13 +1,12 @@
-# Hermes Desktop ☤
+# SANA Desktop ✦
 
 <p align="center">
-  <a href="https://github.com/NousResearch/hermes-agent/releases"><img src="https://img.shields.io/badge/Download-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-FFD700?style=for-the-badge" alt="Download"></a>
-  <a href="https://hermes-agent.nousresearch.com/docs/"><img src="https://img.shields.io/badge/Docs-hermes--agent.nousresearch.com-FFD700?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://github.com/NousResearch/hermes-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
+  <a href="https://github.com/Q8iMK/SANA/releases"><img src="https://img.shields.io/badge/Download-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-D4AF37?style=for-the-badge" alt="Download"></a>
+  <a href="https://github.com/Q8iMK/SANA"><img src="https://img.shields.io/badge/Developed%20by-Q8iDevAI-0B0B0F?style=for-the-badge" alt="Developed by Q8iDevAI"></a>
+  <a href="https://github.com/Q8iMK/SANA/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge" alt="License: MIT"></a>
 </p>
 
-**The native desktop app for [Hermes Agent](../../README.md) — the self-improving AI agent from [Nous Research](https://nousresearch.com).** Same agent, same skills, same memory as the CLI and gateway, in a polished native window — chat with streaming tool output, side-by-side previews, a file browser, voice, and settings, no terminal required. Available for **macOS, Windows, and Linux**.
+**The native desktop app for [SANA](../../README.md) — Your Intelligent AI Assistant by Q8iDevAI** (based on Hermes Agent by [Nous Research](https://nousresearch.com)). Same agent, same skills, same memory as the CLI and gateway, in a polished native window — chat with streaming tool output, side-by-side previews, a file browser, voice, and settings, no terminal required. Available for **macOS, Windows, and Linux**.
 
 > **Intel Macs:** the `Hermes-Setup.dmg` bootstrap installer is built for
 > Apple Silicon (arm64) only, so on an Intel Mac it reports "not supported on
@@ -28,19 +27,19 @@
 
 ## Install
 
-### Install with Hermes (recommended)
+### Install with SANA (recommended)
 
-Already have the Hermes CLI? Just run:
+Already have the SANA CLI? Just run:
 
 ```bash
-hermes desktop
+sana desktop
 ```
 
-It builds and launches the GUI against your existing install — same config, keys, sessions, and skills. If Desktop cannot find a usable runtime or saved remote connection, first launch lets you connect to an existing Hermes gateway or install Hermes locally. Local onboarding then walks you through choosing a provider and model.
+It builds and launches the GUI against your existing install — same config, keys, sessions, and skills. If Desktop cannot find a usable runtime or saved remote connection, first launch lets you connect to an existing SANA gateway or install SANA locally. Local onboarding then walks you through choosing a provider and model.
 
 ### Prebuilt installers
 
-Prebuilt installers are built and distributed via [the Hermes Desktop website.](https://hermes-agent.nousresearch.com/).
+Prebuilt installers are distributed via [SANA GitHub Releases](https://github.com/Q8iMK/SANA/releases).
 
 ---
 
@@ -132,7 +131,7 @@ The app has three boundaries:
   filesystem/git/window capabilities, and exposes a narrow preload bridge.
 - **React** owns the Desktop routes, panes, interaction state, and
   `@assistant-ui/react` transcript.
-- **Hermes Agent** runs as a headless `hermes serve` process and exposes the
+- **SANA backend** runs as a headless `sana serve` (or `hermes serve`) process and exposes the
   `tui_gateway` JSON-RPC/WebSocket API. The renderer connects through
   [`apps/shared`](../shared/), which is also used by the browser dashboard.
 
@@ -262,9 +261,9 @@ Remove-Item -Recurse -Force "$env:LOCALAPPDATA\hermes\hermes-agent\venv"
 
 ## Community
 
-- 💬 [Discord](https://discord.gg/NousResearch)
-- 📖 [Documentation](https://hermes-agent.nousresearch.com/docs/)
-- 🐛 [Issues](https://github.com/NousResearch/hermes-agent/issues)
+- 📖 [Documentation](../../docs/sana/INSTALLATION.md)
+- 🐛 [Issues (SANA)](https://github.com/Q8iMK/SANA/issues)
+- 💡 [Discussions (SANA)](https://github.com/Q8iMK/SANA/discussions)
 
 ---
 
@@ -272,4 +271,4 @@ Remove-Item -Recurse -Force "$env:LOCALAPPDATA\hermes\hermes-agent\venv"
 
 MIT — see [LICENSE](../../LICENSE).
 
-Built by [Nous Research](https://nousresearch.com).
+Developed and maintained by **Q8iDevAI**. Based on [Hermes Agent](https://github.com/NousResearch/hermes-agent) by [Nous Research](https://nousresearch.com).
