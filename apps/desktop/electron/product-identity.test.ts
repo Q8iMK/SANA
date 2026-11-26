@@ -52,6 +52,15 @@ async function identityForVariant(variant: string | undefined): Promise<ProductI
   return (await import('./product-identity')).PRODUCT_IDENTITY
 }
 
+test('bundling the local engine preserves the existing SANA installation identity', async (): Promise<void> => {
+  const existing: ProductIdentity = await identityForVariant(undefined)
+  const bundled: ProductIdentity = await identityForVariant('bundled')
+  assert.equal(bundled.appId, existing.appId)
+  assert.equal(bundled.appNamePascal, existing.appNamePascal)
+  assert.equal(bundled.msixAppIdWithOrg, 'Q8iDevAI.SANA')
+  assert.equal(bundled.windowsExecutableName, existing.windowsExecutableName)
+})
+
 test('baked runtime identity never evaluates ambient build selectors', async (): Promise<void> => {
   const dir: string = fs.mkdtempSync(path.join(os.tmpdir(), 'baked-identity-'))
 
@@ -181,21 +190,11 @@ test.each([
   }
 )
 
-test('light and bundled retain distinct OS markers from the full client', async (): Promise<void> => {
+test('light retains distinct OS markers from the full client', async (): Promise<void> => {
   const full: ProductIdentity = await identityForVariant(undefined)
-
-  for (const variant of ['bundled', 'light']) {
-    const other: ProductIdentity = await identityForVariant(variant)
-
-    for (const field of ['appId', 'appNamePascal'] as const) {
-      assert.notEqual(other[field], full[field])
-    }
-
-    if (variant === 'light') {
-      assert.notEqual(other.displayName, full.displayName)
-      assert.notEqual(other.msixAppIdWithOrg, full.msixAppIdWithOrg)
-      assert.notEqual(other.channel, full.channel)
-    }
+  const light: ProductIdentity = await identityForVariant('light')
+  for (const field of ['appId', 'appNamePascal', 'displayName', 'msixAppIdWithOrg', 'channel'] as const) {
+    assert.notEqual(light[field], full[field])
   }
 })
 

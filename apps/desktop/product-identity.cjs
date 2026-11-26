@@ -17,8 +17,8 @@ const variants = {
   },
   bundled: {
     display: 'SANA',
-    kebab: 'sana-bundled',
-    pascal: 'SANABundled'
+    kebab: 'sana',
+    pascal: 'SANA'
   }
 }
 
