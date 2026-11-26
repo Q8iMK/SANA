@@ -19,8 +19,10 @@ test('the Store bundler rejects non-release selectors before platform tools or s
   }
 })
 
-test('nonstable MSIX CLI aliases each activate their own entrypoint, never the GUI', () => {
-  const launchers = ['hermes-canary', 'hermes-canary-acp']
+test.each([
+  ['sana', 'sana-acp'],
+  ['hermes-canary', 'hermes-canary-acp']
+])('MSIX CLI aliases each activate their own entrypoint, never the GUI (%s)', (...launchers) => {
   const applications = msix.appExecutionAliasApplications(launchers, {
     appNamePascal: 'HermesBundledCanary', displayName: 'Hermes Agent Canary'
   })
@@ -31,6 +33,22 @@ test('nonstable MSIX CLI aliases each activate their own entrypoint, never the G
     assert.ok(apps[index].includes(`Alias="${name}.exe"`))
     assert.equal((apps[index].match(/<uap5:ExecutionAlias /g) || []).length, 1)
     assert.ok(apps[index].includes('AppListEntry="none"'))
+  }
+})
+
+test('SANA and compatibility command keys publish unique aliases with distinct ACP entrypoints', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sana-launchers-'))
+  try {
+    fs.mkdirSync(path.join(root, 'bin'))
+    const commands = { sana: 'bin/sana.exe', 'sana-acp': 'bin/sana-acp.exe', hermes: 'bin/hermes.exe', 'hermes-acp': 'bin/hermes-acp.exe' }
+    for (const [name, file] of Object.entries(commands)) fs.writeFileSync(path.join(root, file), name.endsWith('acp') ? 'ACP' : 'CLI')
+    fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ target: 'win32-x64', runtime: { commands } }))
+    const manifest = stamps.stageDesktopLaunchers(root, { cliName: 'sana' })
+    assert.deepEqual(manifest.launchers, ['sana', 'sana-acp'])
+    assert.equal(fs.readFileSync(path.join(root, manifest.runtime.commands['hermes-acp']), 'utf8'), 'ACP')
+    assert.deepEqual(stamps.stageDesktopLaunchers(root, { cliName: 'sana' }), manifest)
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true })
   }
 })
 

@@ -77,3 +77,14 @@ test('the builder config requests unvirtualizedResources for MSIX packages', () 
   const config = require('../electron-builder.config.cjs')
   expect(config.msix.capabilities).toContain('unvirtualizedResources')
 })
+
+test('release staging preserves separate CLI applications in the prepared manifest', () => {
+  const app = taggedApp('v0.27.1')
+  const generated = path.join(app, 'build/msix-manifest.xml')
+  fs.mkdirSync(path.dirname(generated), { recursive: true })
+  const template = fs.readFileSync(path.join(app, 'assets/msix-manifest.xml'), 'utf8')
+  const cliApplication = '<Application Id="SanaAcp" Executable="app\\resources\\agent-payload\\bin\\sana-acp.exe" />'
+  fs.writeFileSync(generated, template.replace('</Applications>', `${cliApplication}</Applications>`))
+  const staged = stageReleaseManifest(app, 'v0.27.1')
+  expect(fs.readFileSync(staged, 'utf8')).toContain(cliApplication)
+})

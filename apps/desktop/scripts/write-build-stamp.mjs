@@ -139,7 +139,7 @@ export function stageDesktopLaunchers(root, identity = productIdentity) {
     launchers.push(alias)
   }
   manifest.runtime.commands = commands
-  manifest.launchers = launchers
+  manifest.launchers = [...new Set(launchers)]
   writeFileSync(file, JSON.stringify(manifest, null, 2) + '\n')
   return manifest
 }

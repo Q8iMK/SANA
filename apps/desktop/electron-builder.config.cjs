@@ -270,7 +270,7 @@ module.exports = {
     // time, so typecheck/test imports don't touch the filesystem.
     customExtensionsPath: 'build/msix-extensions.xml',
     customManifestPath: store ? 'build/store-msix-manifest.xml'
-      : releaseBuild || channelRequest || appNamePascal !== artifactNamePascal
+      : releaseBuild || channelRequest || appNamePascal !== artifactNamePascal || process.env.HERMES_DESKTOP_VARIANT === 'bundled'
         ? 'build/msix-manifest.xml' : 'assets/msix-manifest.xml',
     // Hermes state is deliberately shared with unpackaged CLI/gateway
     // processes. Pair the manifest's disabled virtualization properties with

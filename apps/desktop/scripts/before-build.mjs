@@ -23,8 +23,7 @@ const {
   light,
   store,
   displayName,
-  appNamePascal,
-  artifactNamePascal
+  appNamePascal
 } = require('../product-identity.cjs')
 
 export default async function beforeBuild() {
@@ -60,7 +59,8 @@ function stageMsixAssets() {
 }
 
 export function stageStoreManifest(desktop, tag) {
-  const template = fs.readFileSync(path.join(desktop, 'assets/msix-manifest.xml'), 'utf8')
+  const generated = path.join(desktop, 'build/msix-manifest.xml')
+  const template = fs.readFileSync(fs.existsSync(generated) ? generated : path.join(desktop, 'assets/msix-manifest.xml'), 'utf8')
   const { version } = appIdentity(desktop, tag)
   const output = path.join(desktop, 'build/store-msix-manifest.xml')
   fs.mkdirSync(path.dirname(output), { recursive: true })
@@ -70,10 +70,8 @@ export function stageStoreManifest(desktop, tag) {
 
 export function stageReleaseManifest(desktop, tag) {
   const generated = path.join(desktop, 'build/msix-manifest.xml')
-  const { identity, version } = appIdentity(desktop, tag)
-  const source = identity.appNamePascal === identity.artifactNamePascal || !fs.existsSync(generated)
-    ? path.join(desktop, 'assets/msix-manifest.xml')
-    : generated
+  const { version } = appIdentity(desktop, tag)
+  const source = fs.existsSync(generated) ? generated : path.join(desktop, 'assets/msix-manifest.xml')
   const template = fs.readFileSync(source, 'utf8')
   fs.mkdirSync(path.dirname(generated), { recursive: true })
   fs.writeFileSync(generated, nativeManifestTemplate(template, version), 'utf8')
@@ -88,15 +86,11 @@ function writeMsixExtensions() {
   const launchers = ['bundled', 'store'].includes(process.env.HERMES_DESKTOP_VARIANT || '')
     ? JSON.parse(fs.readFileSync(manifest, 'utf8')).launchers : []
   if (!Array.isArray(launchers)) throw new Error('Bundled payload has no declared launchers')
-  const nonstable = appNamePascal !== artifactNamePascal
-  const aliases = nonstable ? '' : appExecutionAliasExtensions(launchers)
-  if (nonstable) {
-    const template = fs.readFileSync(path.join(desktop, 'assets/msix-manifest.xml'), 'utf8')
-    const applications = appExecutionAliasApplications(launchers, { appNamePascal, displayName })
-    fs.mkdirSync(path.join(desktop, 'build'), { recursive: true })
-    fs.writeFileSync(path.join(desktop, 'build/msix-manifest.xml'),
-      template.replace('</Applications>', `${applications}\n  </Applications>`))
-  }
+  const template = fs.readFileSync(path.join(desktop, 'assets/msix-manifest.xml'), 'utf8')
+  const applications = appExecutionAliasApplications(launchers, { appNamePascal, displayName })
+  fs.mkdirSync(path.join(desktop, 'build'), { recursive: true })
+  fs.writeFileSync(path.join(desktop, 'build/msix-manifest.xml'),
+    template.replace('</Applications>', `${applications}\n  </Applications>`))
   // The uap3:AppExtension fragment that registers the app as a Windows
   // Copilot hardware key provider. The press activates hermes://copilot-key/start.
   //
@@ -125,8 +119,7 @@ function writeMsixExtensions() {
       <PressAndHoldStop>hermes://copilot-key/stop?state=Up</PressAndHoldStop>
     </uap3:Properties>
   </uap3:AppExtension>
-</uap3:Extension>
-${aliases}`
+</uap3:Extension>`
 
   fs.mkdirSync(path.dirname(file), { recursive: true })
   fs.writeFileSync(file, copilot)
