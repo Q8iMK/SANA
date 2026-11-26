@@ -36,7 +36,7 @@
 // otherwise-good build (worst case: stock icon, not a broken app).
 
 import { resolve, join } from 'node:path'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 
 import { rcedit } from 'rcedit'
 
@@ -68,7 +68,7 @@ function wait(delay) {
 async function stampExeIdentity(
   exe,
   desktopRoot = resolve(import.meta.dirname, '..'),
-  { rcedit: runRcedit = rcedit, sleep = wait } = {}
+  { rcedit: runRcedit = rcedit, sleep = wait, version } = {}
 ) {
   if (!exe || !existsSync(exe)) {
     throw new Error(`target exe not found: ${exe}`)
@@ -83,13 +83,17 @@ async function stampExeIdentity(
   console.log(`[set-exe-identity] stamping ${exe}`)
   console.log(`[set-exe-identity] icon: ${icon}`)
 
+  const metadata = JSON.parse(readFileSync(join(desktopRoot, 'package.json'), 'utf8'))
+  const productVersion = version ?? metadata.version
   const options = {
     icon,
+    'file-version': productVersion,
+    'product-version': productVersion,
     'version-string': {
-      ProductName: 'Hermes',
-      FileDescription: 'Hermes',
-      CompanyName: 'Nous Research',
-      LegalCopyright: 'Copyright (c) 2026 Nous Research'
+      ProductName: metadata.productName,
+      FileDescription: metadata.productName,
+      CompanyName: metadata.author,
+      LegalCopyright: `Copyright (c) 2026 ${metadata.author}`
     }
   }
 
@@ -107,7 +111,7 @@ async function stampExeIdentity(
     }
   }
 
-  console.log('[set-exe-identity] done — Hermes icon + identity stamped')
+  console.log(`[set-exe-identity] done — ${metadata.productName} icon + identity stamped`)
 }
 
 export { RCEDIT_COMMIT_RETRY_DELAYS_MS, stampExeIdentity }

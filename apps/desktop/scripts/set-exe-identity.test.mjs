@@ -10,10 +10,31 @@ function makeDesktopRoot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'hermes-exe-identity-'))
   fs.mkdirSync(path.join(root, 'assets'))
   fs.writeFileSync(path.join(root, 'assets', 'icon.ico'), 'icon')
+  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify({
+    productName: 'SANA', author: 'Q8iDevAI', version: '0.0.0'
+  }))
   const exe = path.join(root, 'Hermes.exe')
   fs.writeFileSync(exe, 'exe')
   return { exe, root }
 }
+
+test('stamps SANA product metadata and the packaged release version', async () => {
+  const { exe, root } = makeDesktopRoot()
+  try {
+    await stampExeIdentity(exe, root, {
+      version: '0.23.4',
+      rcedit: async (target, options) => {
+        assert.equal(target, exe)
+        assert.equal(options['version-string'].ProductName, 'SANA')
+        assert.equal(options['version-string'].CompanyName, 'Q8iDevAI')
+        assert.equal(options['file-version'], '0.23.4')
+        assert.equal(options['product-version'], '0.23.4')
+      }
+    })
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true })
+  }
+})
 
 test('retries transient rcedit commit failures with bounded backoff', async () => {
   const { exe, root } = makeDesktopRoot()

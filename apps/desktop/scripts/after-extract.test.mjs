@@ -30,9 +30,9 @@ test('stamps the stock electron.exe on win32 only, before it is renamed to Herme
   await afterExtract({
     appOutDir,
     electronPlatformName: 'win32',
-    packager: { appInfo: { productFilename: 'Hermes' } }
+    packager: { appInfo: { productFilename: 'SANA', version: '0.23.4' } }
   })
-  assert.deepEqual(stampExeIdentity.mock.calls, [[path.join(appOutDir, 'electron.exe'), desktopRoot]])
+  assert.deepEqual(stampExeIdentity.mock.calls, [[path.join(appOutDir, 'electron.exe'), desktopRoot, { version: '0.23.4' }]])
 
   stampExeIdentity.mockClear()
   await afterExtract({

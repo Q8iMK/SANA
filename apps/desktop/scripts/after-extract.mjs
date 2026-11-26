@@ -39,7 +39,7 @@ export default async function afterExtract(context) {
   const desktopRoot = path.resolve(import.meta.dirname, '..')
 
   try {
-    await stampExeIdentity(exe, desktopRoot)
+    await stampExeIdentity(exe, desktopRoot, { version: context.packager?.appInfo?.version })
   } catch (err) {
     // Never fail the build over a cosmetic stamp.
     console.warn(`[after-extract] exe identity stamp failed (${err.message}); ${projectName}.exe keeps the stock Electron icon`)
